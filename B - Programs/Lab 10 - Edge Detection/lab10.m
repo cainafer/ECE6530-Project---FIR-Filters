@@ -56,7 +56,7 @@
 % 10.2.2: Filtering Images via Convolution
 
 % Load an image and convert to monocrhome
-imdata = imread('monkey.png');
+imdata = imread('bin/monkey.png');
 newmap = rgb2gray(imdata);
 
 % Get image array size
@@ -183,7 +183,7 @@ xlabel('k');
 %     cross-section of the image into x(n)
 
 % Import Image of Bar Code
-imdata = imread('HP110v3.png');
+imdata = imread('bin/HP110v3.png');
 
 % Extract one line of the Bar Code
 xx = imdata(100,:);
@@ -223,7 +223,7 @@ ll = find(dd);
 % Plot d(n)
 figure(322);
 stem(ll,'k');
-title('10.3.1 Edge Location Signal')
+title('10.3.2 Edge Location Signal')
 ylabel('l(n)');
 xlabel('n');
 
@@ -232,7 +232,10 @@ xlabel('n');
 %     there are approximately four different widths in the bar code.
 
 DD = firfilt(bb, ll);
-DD(end) = [];   % Delete outlier
+
+% Delete outlier (just for plot visual, the next filter would have 
+% eliminated it anyway)
+DD(end) = [];   
 
 % Plot
 figure(323)
@@ -260,12 +263,127 @@ ylabel('\Delta(n)');
 %   3u + 3u + 5u + 12*7u = 95u
 
 
-% (f) Convert the bar widths into unit widths.
+% (f) Determine the unit width of the bar code 
+
+% Filter out extra lines
+while(length(DD) > 59)
+    % Estimate Basic unit width
+    u = sum(DD)/95;
+    
+    c1 = abs((DD(1)-u)/u);
+    c2 = abs((DD(end)-u)/u);
+    
+    
+    % Delete first and last signals if they are not close to unit length
+    if (c1 > 0.01)
+        DD(1) = [];
+    end
+    if (c2 > 0.01)
+        DD(end) = [];
+    end
+end
 
 % Basic unit width
-u = sum(DD(1:59))/length(DD);
+u = sum(DD)/95
+
+% (g) Convert the bar widths into unit widths.
 
 % Per Unit Signal
 uu = round(DD/u);
 
+% Plot
+figure(324)
+stem(uu,'k');
+title('10.3.2 Bar Code #1 Normalized Signal')
+ylabel('u(n)')
+xlabel('n');
 
+% (h) Decode the Bar Code
+
+code = decodeUPC(uu)
+
+%% 10.3.2 (j) Process Bar Code #2
+
+
+% Import Image of Bar Code
+imdata = imread('bin/OFFv3.png');
+
+% Extract one line of the Bar Code
+xx = imdata(100,:);
+
+% Define the Filter
+bb = [1 -1];
+
+% Filter signal
+yy = firfilt(bb, xx);
+
+% Plot
+figure(325)
+subplot(2,1,1);
+stem(xx,'k');
+title('10.3.2 Bar Code #2 FIR Filter')
+ylabel('x(n)')
+subplot(2,1,2);
+stem(yy,'k');
+xlabel('n');
+ylabel('y(n)');
+
+% Threshold
+t = 100;
+
+% Sparce Detected signal
+dd = (abs(yy) > t);
+
+% Location signal
+ll = find(dd);
+
+% Plot d(n)
+figure(326);
+stem(ll,'k');
+title('10.3.2 Edge Location Signal')
+ylabel('l(n)');
+xlabel('n');
+
+% Apply a first-difference filter to the location signal
+DD = firfilt(bb, ll);
+
+% Filter out extra lines
+while(length(DD) > 59)
+    % Estimate Basic unit width
+    u = sum(DD)/95;
+    
+    c1 = abs((DD(1)-u)/u);
+    c2 = abs((DD(end)-u)/u);
+    
+    
+    % Delete first and last signals if they are not close to unit length
+    if (c1 > 0.01)
+        DD(1) = [];
+        ll(1) = [];
+    end
+    if (c2 > 0.01)
+        DD(end) = [];
+        ll(end) = [];
+    end
+end
+
+% Basic unit width
+u = sum(DD)/95
+
+% Per Unit Signal
+uu = round(DD/u);
+
+% Plot
+figure(327)
+subplot(2,1,1);
+stem(ll,'k');
+title('10.3.2 Bar Code #2 Filtered Location Signal')
+ylabel('l(n)')
+subplot(2,1,2);
+stem(uu,'k');
+xlabel('n');
+ylabel('u(n)');
+
+% Decode the Bar Code
+
+code = decodeUPC(uu)

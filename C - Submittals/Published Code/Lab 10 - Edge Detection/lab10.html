@@ -1,0 +1,843 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>lab10</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-13"><meta name="DC.source" content="lab10.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">--- LAB 10: EDGE DETECTION IN IMAGES: UPC DECODING --- %%</a></li><li><a href="#2">SECTION 10.1: Pre-Lab</a></li><li><a href="#3">SECTION 10.2: Warm-up</a></li><li><a href="#4">SECTION 10.3: FIR Filtering of Images</a></li><li><a href="#5">10.3.1: Finding Edges</a></li><li><a href="#6">10.3.2: Bar Code Detection and Decoding</a></li><li><a href="#7">10.3.2 (j) Process Bar Code #2</a></li></ul></div><h2 id="1">--- LAB 10: EDGE DETECTION IN IMAGES: UPC DECODING --- %%</h2><pre class="codeinput"><span class="comment">% DESCRIPTION:</span>
+<span class="comment">%   Utilize FIR Filters to detect edges in images using MatLab inorder to</span>
+<span class="comment">%   decode UPC barcodes. Required functions for this lab include</span>
+<span class="comment">%   dconvdemo() and firfilt().</span>
+</pre><h2 id="2">SECTION 10.1: Pre-Lab</h2><pre class="codeinput"><span class="comment">% TERMINOLOGY:</span>
+<span class="comment">%   nn: 1xn Time Indices</span>
+<span class="comment">%   xx: 1xn Input signal</span>
+<span class="comment">%   bb: 1xk Filter Coefficients</span>
+<span class="comment">%   yy: 1xk Output signal</span>
+
+<span class="comment">% EQUATIONS:</span>
+<span class="comment">%   length(yy) = length(xx) + length(bb) - 1</span>
+
+<span class="comment">% DEMO:</span>
+<span class="comment">% dconvdemo();   % Open the dconvdemo directory and type this command into</span>
+<span class="comment">%                % the command console.</span>
+</pre><h2 id="3">SECTION 10.2: Warm-up</h2><pre class="codeinput"><span class="comment">% 10.2.1 Using dconvdemo() do the following:</span>
+<span class="comment">%   (a) Find the convolution of two impulses &#948;(n-3)*&#948;(n-5)</span>
+<span class="comment">%</span>
+<span class="comment">%   (b) Filter the input signal x(n)=(-3)[u(n-2)-u(n-8)] with a first-</span>
+<span class="comment">%       difference filter such that y(n)=x(n)-x(n-1)</span>
+<span class="comment">%</span>
+<span class="comment">%       We can determine from y(n) that bb = [1 -1]</span>
+<span class="comment">%</span>
+<span class="comment">%   (c) Explain why y(n) is zero for most of n</span>
+<span class="comment">%</span>
+<span class="comment">%       It is due to the coefficients bb.  During the filtering process,</span>
+<span class="comment">%       any identical values of neighboring x(n) are cancelled during</span>
+<span class="comment">%       the convolution stage.  This makes the first-difference filter a</span>
+<span class="comment">%       useful tool for edge detection in images.</span>
+<span class="comment">%</span>
+<span class="comment">%   (d) Convolve two rectangular pulses:</span>
+<span class="comment">%       Pulse One: Amplitude of 2, Length of 7</span>
+<span class="comment">%       Pulse Two: Amplitude of 3, Length of 4</span>
+<span class="comment">%</span>
+<span class="comment">%   (e) State the length and maximum amplitude of the convolution from (d)</span>
+<span class="comment">%</span>
+<span class="comment">%   (f) Explain why some values of y(n) are positive or negative</span>
+<span class="comment">%</span>
+<span class="comment">%       The first-difference filter outputs a positive difference when the</span>
+<span class="comment">%       next value of x is larger than the previous element.  Likewise, the</span>
+<span class="comment">%       output is negative when the next value of x is less than the</span>
+<span class="comment">%       previous element.</span>
+
+<span class="comment">% 10.2.2: Filtering Images via Convolution</span>
+
+<span class="comment">% Load an image and convert to monocrhome</span>
+imdata = imread(<span class="string">'bin/monkey.png'</span>);
+newmap = rgb2gray(imdata);
+
+<span class="comment">% Get image array size</span>
+[rows,cols] = size(newmap);
+
+<span class="comment">% Define Filter</span>
+bb = [1 -1];
+
+<span class="comment">% Filter image row-by-row</span>
+yy = zeros(rows+1,cols+1);
+<span class="keyword">for</span> i = 1:rows
+    yy(i,:) = yy(i,:) + abs(conv(newmap(i,:), bb));
+<span class="keyword">end</span>
+<span class="keyword">for</span> i = 1:cols
+    yy(:,i) = yy(:,i) + abs(conv(newmap(:,i), bb));
+<span class="keyword">end</span>
+
+<span class="comment">% Filter Out Noise</span>
+t = 50;
+yy = 255*(abs(yy) &gt; t);
+
+<span class="comment">% Display Output Image</span>
+figure(221);
+subplot(2,1,1);
+imshow(newmap);
+title(<span class="string">'10.2.2 Example of Edge Detection'</span>)
+subplot(2,1,2);
+imshow(yy);
+</pre><img vspace="5" hspace="5" src="lab10_01.png" alt=""> <h2 id="4">SECTION 10.3: FIR Filtering of Images</h2><p>FIR Filtering can be used to produce special effects including:   1. Edge Detection   2. Echo   3. Deconvolution</p><p>In this section, we will use FIR filtering to decode barcodes by using the first-difference filter on UPC barcode images.</p><h2 id="5">10.3.1: Finding Edges</h2><p>Implement the first-difference FIR filter on the following input signal:</p><pre class="codeinput">xx = 255*(rem(1:159,30)&gt;19);
+bb = [1 -1];
+
+<span class="comment">% The filtered output is</span>
+yy = firfilt(bb, xx);
+
+<span class="comment">% (a) Plot the input and output waveforms</span>
+figure(311)
+subplot(2,1,1);
+stem(xx,<span class="string">'k'</span>);
+title(<span class="string">'10.3.1 First-difference FIR Filter'</span>)
+ylabel(<span class="string">'x(n)'</span>)
+subplot(2,1,2);
+stem(yy,<span class="string">'k'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'y(n)'</span>);
+
+<span class="comment">% (b) Explain why the output appears the way it does.</span>
+<span class="comment">%</span>
+<span class="comment">%   This is a result of edge filtering.  The convolution x(n)*h(n) can be</span>
+<span class="comment">%   described by</span>
+<span class="comment">%</span>
+<span class="comment">%   y(n) = sum_{k=0}^{M-1}b(k)x(n-k)</span>
+<span class="comment">%</span>
+<span class="comment">%   The edge detection property of the first-difference FIR filter produces</span>
+<span class="comment">%   positive magnitudes at transitions where x(n) &lt; x(n+1), and it produces</span>
+<span class="comment">%   negative magnitudes where x(n) &gt; x(n+1).</span>
+
+<span class="comment">% (c) Determine the length of y(n) and explain how its length is related to</span>
+<span class="comment">%     the length of x(n) and the length of the FIR filter.</span>
+<span class="comment">%</span>
+<span class="comment">%   Due to the process of convolution, the length of the output will not</span>
+<span class="comment">%   always equal the length of the input.  The output length can be</span>
+<span class="comment">%   determined by</span>
+<span class="comment">%</span>
+<span class="comment">%   length(yy) = length(xx) + length(bb) -1</span>
+<span class="comment">%</span>
+<span class="comment">%   In the case of the first-difference FIR filter, the length of y(n) will</span>
+<span class="comment">%   always be one greater than the length of x(n).  Therefore, the length</span>
+<span class="comment">%   of the output for this case is 160.</span>
+
+<span class="comment">% (d) Use a threshold to convert the output into binary values and store</span>
+<span class="comment">%     them in a new array d(n).</span>
+
+<span class="comment">% Threshold</span>
+t = 10;
+
+<span class="comment">% Sparce Detected Signal</span>
+dd = (abs(yy) &gt; t);
+
+<span class="comment">% Plot d(n)</span>
+figure(312);
+stem(dd,<span class="string">'k'</span>);
+title(<span class="string">'10.3.1 Sparce Detected Signal'</span>)
+ylabel(<span class="string">'d(n)'</span>);
+xlabel(<span class="string">'n'</span>);
+
+<span class="comment">% (e) Use the find() function to create a new array l(n) which will hold</span>
+<span class="comment">%     the element address (location) of the detected edge in d(n).</span>
+
+ll = find(dd);
+
+<span class="comment">% Plot l(n)</span>
+figure(313);
+stem(ll,<span class="string">'k'</span>);
+title(<span class="string">'10.3.1 Edge Location Signal'</span>)
+ylabel(<span class="string">'l(n)'</span>);
+xlabel(<span class="string">'k'</span>);
+
+<span class="comment">% The binary filtered signal only has one mark per transistion.  Note that</span>
+<span class="comment">% the edge is located following the transition and not preceding it.</span>
+</pre><img vspace="5" hspace="5" src="lab10_02.png" alt=""> <img vspace="5" hspace="5" src="lab10_03.png" alt=""> <img vspace="5" hspace="5" src="lab10_04.png" alt=""> <h2 id="6">10.3.2: Bar Code Detection and Decoding</h2><p>A barcode consists of alternating black and white bars with varying lengths.  The Universal Product Code (UPC) dictates the required combination of widths and numbers of bars that correspond to a number from 0 to 9.  The standard uses a 4-bar combo per number with a total of 12 digits per code.  For this next part of the lab, we will use FIR filtering to detect the edges of a barcode and then use that data to decode the value of the barcode.</p><pre class="codeinput"><span class="comment">% (a) Import the image 'HP110v3.png' into MatLab and extract a horizontal</span>
+<span class="comment">%     cross-section of the image into x(n)</span>
+
+<span class="comment">% Import Image of Bar Code</span>
+imdata = imread(<span class="string">'bin/HP110v3.png'</span>);
+
+<span class="comment">% Extract one line of the Bar Code</span>
+xx = imdata(100,:);
+
+<span class="comment">% (b) Filter the signal x(n) with a first-difference FIR filter and plot</span>
+<span class="comment">%     the input and output.</span>
+
+<span class="comment">% Define the Filter</span>
+bb = [1 -1];
+
+<span class="comment">% Filter signal</span>
+yy = firfilt(bb, xx);
+
+<span class="comment">% Plot</span>
+figure(321)
+subplot(2,1,1);
+stem(xx,<span class="string">'k'</span>);
+title(<span class="string">'10.3.2 Bar Code #1 FIR Filter'</span>)
+ylabel(<span class="string">'x(n)'</span>)
+subplot(2,1,2);
+stem(yy,<span class="string">'k'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'y(n)'</span>);
+
+<span class="comment">% (c) Create a sparce detected signal d(n) and then create a location</span>
+<span class="comment">%     signal l(n).  Plot the results.</span>
+
+<span class="comment">% Threshold</span>
+t = 100;
+
+<span class="comment">% Sparce Detected signal</span>
+dd = (abs(yy) &gt; t);
+
+<span class="comment">% Location signal</span>
+ll = find(dd);
+
+<span class="comment">% Plot d(n)</span>
+figure(322);
+stem(ll,<span class="string">'k'</span>);
+title(<span class="string">'10.3.2 Edge Location Signal'</span>)
+ylabel(<span class="string">'l(n)'</span>);
+xlabel(<span class="string">'n'</span>);
+
+<span class="comment">% (d) Apply a first-difference filter to the location signal called D(n)</span>
+<span class="comment">%     and make a plot.  Explain hwo the plot of D(n) conveys the idea that</span>
+<span class="comment">%     there are approximately four different widths in the bar code.</span>
+
+DD = firfilt(bb, ll);
+
+<span class="comment">% Delete outlier (just for plot visual, the next filter would have</span>
+<span class="comment">% eliminated it anyway)</span>
+DD(end) = [];
+
+<span class="comment">% Plot</span>
+figure(323)
+subplot(2,1,1);
+stem(ll,<span class="string">'k'</span>);
+title(<span class="string">'10.3.2 Bar Code #1 Filtered Location Signal'</span>)
+ylabel(<span class="string">'l(n)'</span>)
+subplot(2,1,2);
+stem(DD,<span class="string">'k'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'\Delta(n)'</span>);
+
+<span class="comment">% By inspection of D(n), the spacing between edges giving a distinct sizing</span>
+<span class="comment">% of four different bar widths that are multiples of 8 units wide.</span>
+
+<span class="comment">% (e) Prove that the total width of a valid 12-digit bar code is equal to</span>
+<span class="comment">%     95u.</span>
+
+<span class="comment">% The 12-digit bar code is composed of:</span>
+<span class="comment">%   - 3 Start Bars of u length</span>
+<span class="comment">%   - 3 Stop Bars of u length</span>
+<span class="comment">%   - 5 Middle Bars of u length</span>
+<span class="comment">%   - 12 Digits, each with four bars with total width of 7u</span>
+<span class="comment">% Thus, the total length is</span>
+<span class="comment">%   3u + 3u + 5u + 12*7u = 95u</span>
+
+
+<span class="comment">% (f) Determine the unit width of the bar code</span>
+
+<span class="comment">% Filter out extra lines</span>
+<span class="keyword">while</span>(length(DD) &gt; 59)
+    <span class="comment">% Estimate Basic unit width</span>
+    u = sum(DD)/95;
+
+    c1 = abs((DD(1)-u)/u);
+    c2 = abs((DD(end)-u)/u);
+
+
+    <span class="comment">% Delete first and last signals if they are not close to unit length</span>
+    <span class="keyword">if</span> (c1 &gt; 0.01)
+        DD(1) = [];
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> (c2 &gt; 0.01)
+        DD(end) = [];
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Basic unit width</span>
+u = sum(DD)/95
+
+<span class="comment">% (g) Convert the bar widths into unit widths.</span>
+
+<span class="comment">% Per Unit Signal</span>
+uu = round(DD/u);
+
+<span class="comment">% Plot</span>
+figure(324)
+stem(uu,<span class="string">'k'</span>);
+title(<span class="string">'10.3.2 Bar Code #1 Normalized Signal'</span>)
+ylabel(<span class="string">'u(n)'</span>)
+xlabel(<span class="string">'n'</span>);
+
+<span class="comment">% (h) Decode the Bar Code</span>
+
+code = decodeUPC(uu)
+</pre><pre class="codeoutput">
+u =
+
+    7.8947
+
+
+ssbeg =
+
+     1     1     1
+
+
+code =
+
+     8     8     2     7     8     0     4     5     0     1     6     5
+
+</pre><img vspace="5" hspace="5" src="lab10_05.png" alt=""> <img vspace="5" hspace="5" src="lab10_06.png" alt=""> <img vspace="5" hspace="5" src="lab10_07.png" alt=""> <img vspace="5" hspace="5" src="lab10_08.png" alt=""> <h2 id="7">10.3.2 (j) Process Bar Code #2</h2><pre class="codeinput"><span class="comment">% Import Image of Bar Code</span>
+imdata = imread(<span class="string">'bin/OFFv3.png'</span>);
+
+<span class="comment">% Extract one line of the Bar Code</span>
+xx = imdata(100,:);
+
+<span class="comment">% Define the Filter</span>
+bb = [1 -1];
+
+<span class="comment">% Filter signal</span>
+yy = firfilt(bb, xx);
+
+<span class="comment">% Plot</span>
+figure(325)
+subplot(2,1,1);
+stem(xx,<span class="string">'k'</span>);
+title(<span class="string">'10.3.2 Bar Code #2 FIR Filter'</span>)
+ylabel(<span class="string">'x(n)'</span>)
+subplot(2,1,2);
+stem(yy,<span class="string">'k'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'y(n)'</span>);
+
+<span class="comment">% Threshold</span>
+t = 100;
+
+<span class="comment">% Sparce Detected signal</span>
+dd = (abs(yy) &gt; t);
+
+<span class="comment">% Location signal</span>
+ll = find(dd);
+
+<span class="comment">% Plot d(n)</span>
+figure(326);
+stem(ll,<span class="string">'k'</span>);
+title(<span class="string">'10.3.2 Edge Location Signal'</span>)
+ylabel(<span class="string">'l(n)'</span>);
+xlabel(<span class="string">'n'</span>);
+
+<span class="comment">% Apply a first-difference filter to the location signal</span>
+DD = firfilt(bb, ll);
+
+<span class="comment">% Filter out extra lines</span>
+<span class="keyword">while</span>(length(DD) &gt; 59)
+    <span class="comment">% Estimate Basic unit width</span>
+    u = sum(DD)/95;
+
+    c1 = abs((DD(1)-u)/u);
+    c2 = abs((DD(end)-u)/u);
+
+
+    <span class="comment">% Delete first and last signals if they are not close to unit length</span>
+    <span class="keyword">if</span> (c1 &gt; 0.01)
+        DD(1) = [];
+        ll(1) = [];
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> (c2 &gt; 0.01)
+        DD(end) = [];
+        ll(end) = [];
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Basic unit width</span>
+u = sum(DD)/95
+
+<span class="comment">% Per Unit Signal</span>
+uu = round(DD/u);
+
+<span class="comment">% Plot</span>
+figure(327)
+subplot(2,1,1);
+stem(ll,<span class="string">'k'</span>);
+title(<span class="string">'10.3.2 Bar Code #2 Filtered Location Signal'</span>)
+ylabel(<span class="string">'l(n)'</span>)
+subplot(2,1,2);
+stem(uu,<span class="string">'k'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'u(n)'</span>);
+
+<span class="comment">% Decode the Bar Code</span>
+
+code = decodeUPC(uu)
+</pre><pre class="codeoutput">
+u =
+
+    2.6737
+
+
+ssbeg =
+
+     1     1     1
+
+
+code =
+
+     0     4     6     5     0     0     7     0     3     1     9     5
+
+</pre><img vspace="5" hspace="5" src="lab10_09.png" alt=""> <img vspace="5" hspace="5" src="lab10_10.png" alt=""> <img vspace="5" hspace="5" src="lab10_11.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+
+
+%% REPLACE_WITH_DASH_DASH- LAB 10: EDGE DETECTION IN IMAGES: UPC DECODING REPLACE_WITH_DASH_DASH- %%
+
+% DESCRIPTION:
+%   Utilize FIR Filters to detect edges in images using MatLab inorder to 
+%   decode UPC barcodes. Required functions for this lab include 
+%   dconvdemo() and firfilt().
+
+%% SECTION 10.1: Pre-Lab
+
+% TERMINOLOGY:
+%   nn: 1xn Time Indices
+%   xx: 1xn Input signal
+%   bb: 1xk Filter Coefficients
+%   yy: 1xk Output signal
+
+% EQUATIONS:
+%   length(yy) = length(xx) + length(bb) - 1
+
+% DEMO:
+% dconvdemo();   % Open the dconvdemo directory and type this command into
+%                % the command console.
+
+%% SECTION 10.2: Warm-up
+
+% 10.2.1 Using dconvdemo() do the following:
+%   (a) Find the convolution of two impulses δ(n-3)*δ(n-5)
+%
+%   (b) Filter the input signal x(n)=(-3)[u(n-2)-u(n-8)] with a first-
+%       difference filter such that y(n)=x(n)-x(n-1)
+%       
+%       We can determine from y(n) that bb = [1 -1]
+%
+%   (c) Explain why y(n) is zero for most of n
+%
+%       It is due to the coefficients bb.  During the filtering process,
+%       any identical values of neighboring x(n) are cancelled during 
+%       the convolution stage.  This makes the first-difference filter a
+%       useful tool for edge detection in images.
+%
+%   (d) Convolve two rectangular pulses: 
+%       Pulse One: Amplitude of 2, Length of 7
+%       Pulse Two: Amplitude of 3, Length of 4
+%
+%   (e) State the length and maximum amplitude of the convolution from (d)
+%
+%   (f) Explain why some values of y(n) are positive or negative
+%
+%       The first-difference filter outputs a positive difference when the
+%       next value of x is larger than the previous element.  Likewise, the
+%       output is negative when the next value of x is less than the 
+%       previous element.
+
+% 10.2.2: Filtering Images via Convolution
+
+% Load an image and convert to monocrhome
+imdata = imread('bin/monkey.png');
+newmap = rgb2gray(imdata);
+
+% Get image array size
+[rows,cols] = size(newmap);
+
+% Define Filter
+bb = [1 -1];
+
+% Filter image row-by-row
+yy = zeros(rows+1,cols+1);
+for i = 1:rows
+    yy(i,:) = yy(i,:) + abs(conv(newmap(i,:), bb));
+end
+for i = 1:cols
+    yy(:,i) = yy(:,i) + abs(conv(newmap(:,i), bb));
+end
+
+% Filter Out Noise
+t = 50;
+yy = 255*(abs(yy) > t);
+
+% Display Output Image
+figure(221);
+subplot(2,1,1);
+imshow(newmap);
+title('10.2.2 Example of Edge Detection')
+subplot(2,1,2);
+imshow(yy);
+
+%% SECTION 10.3: FIR Filtering of Images
+% FIR Filtering can be used to produce special effects including:
+%   1. Edge Detection
+%   2. Echo
+%   3. Deconvolution
+%
+% In this section, we will use FIR filtering to decode barcodes by using
+% the first-difference filter on UPC barcode images.
+
+
+%% 10.3.1: Finding Edges
+% Implement the first-difference FIR filter on the following input signal:
+xx = 255*(rem(1:159,30)>19);
+bb = [1 -1];
+
+% The filtered output is
+yy = firfilt(bb, xx);
+
+% (a) Plot the input and output waveforms
+figure(311)
+subplot(2,1,1);
+stem(xx,'k');
+title('10.3.1 First-difference FIR Filter')
+ylabel('x(n)')
+subplot(2,1,2);
+stem(yy,'k');
+xlabel('n');
+ylabel('y(n)');
+
+% (b) Explain why the output appears the way it does.
+%
+%   This is a result of edge filtering.  The convolution x(n)*h(n) can be
+%   described by
+%
+%   y(n) = sum_{k=0}^{M-1}b(k)x(n-k)
+% 
+%   The edge detection property of the first-difference FIR filter produces
+%   positive magnitudes at transitions where x(n) < x(n+1), and it produces
+%   negative magnitudes where x(n) > x(n+1).         
+
+% (c) Determine the length of y(n) and explain how its length is related to
+%     the length of x(n) and the length of the FIR filter.
+%
+%   Due to the process of convolution, the length of the output will not
+%   always equal the length of the input.  The output length can be
+%   determined by
+%
+%   length(yy) = length(xx) + length(bb) -1
+%  
+%   In the case of the first-difference FIR filter, the length of y(n) will
+%   always be one greater than the length of x(n).  Therefore, the length
+%   of the output for this case is 160.
+
+% (d) Use a threshold to convert the output into binary values and store
+%     them in a new array d(n). 
+
+% Threshold
+t = 10;
+
+% Sparce Detected Signal
+dd = (abs(yy) > t);
+
+% Plot d(n)
+figure(312);
+stem(dd,'k');
+title('10.3.1 Sparce Detected Signal')
+ylabel('d(n)');
+xlabel('n');
+
+% (e) Use the find() function to create a new array l(n) which will hold
+%     the element address (location) of the detected edge in d(n).
+
+ll = find(dd);
+
+% Plot l(n)
+figure(313);
+stem(ll,'k');
+title('10.3.1 Edge Location Signal')
+ylabel('l(n)');
+xlabel('k');
+
+% The binary filtered signal only has one mark per transistion.  Note that
+% the edge is located following the transition and not preceding it.
+
+%% 10.3.2: Bar Code Detection and Decoding
+% A barcode consists of alternating black and white bars with varying
+% lengths.  The Universal Product Code (UPC) dictates the required
+% combination of widths and numbers of bars that correspond to a number
+% from 0 to 9.  The standard uses a 4-bar combo per number with a total of
+% 12 digits per code.  For this next part of the lab, we will use FIR
+% filtering to detect the edges of a barcode and then use that data to
+% decode the value of the barcode.
+
+% (a) Import the image 'HP110v3.png' into MatLab and extract a horizontal
+%     cross-section of the image into x(n)
+
+% Import Image of Bar Code
+imdata = imread('bin/HP110v3.png');
+
+% Extract one line of the Bar Code
+xx = imdata(100,:);
+
+% (b) Filter the signal x(n) with a first-difference FIR filter and plot
+%     the input and output.
+
+% Define the Filter
+bb = [1 -1];
+
+% Filter signal
+yy = firfilt(bb, xx);
+
+% Plot
+figure(321)
+subplot(2,1,1);
+stem(xx,'k');
+title('10.3.2 Bar Code #1 FIR Filter')
+ylabel('x(n)')
+subplot(2,1,2);
+stem(yy,'k');
+xlabel('n');
+ylabel('y(n)');
+
+% (c) Create a sparce detected signal d(n) and then create a location
+%     signal l(n).  Plot the results.
+
+% Threshold
+t = 100;
+
+% Sparce Detected signal
+dd = (abs(yy) > t);
+
+% Location signal
+ll = find(dd);
+
+% Plot d(n)
+figure(322);
+stem(ll,'k');
+title('10.3.2 Edge Location Signal')
+ylabel('l(n)');
+xlabel('n');
+
+% (d) Apply a first-difference filter to the location signal called D(n)
+%     and make a plot.  Explain hwo the plot of D(n) conveys the idea that
+%     there are approximately four different widths in the bar code.
+
+DD = firfilt(bb, ll);
+
+% Delete outlier (just for plot visual, the next filter would have 
+% eliminated it anyway)
+DD(end) = [];   
+
+% Plot
+figure(323)
+subplot(2,1,1);
+stem(ll,'k');
+title('10.3.2 Bar Code #1 Filtered Location Signal')
+ylabel('l(n)')
+subplot(2,1,2);
+stem(DD,'k');
+xlabel('n');
+ylabel('\Delta(n)');
+
+% By inspection of D(n), the spacing between edges giving a distinct sizing
+% of four different bar widths that are multiples of 8 units wide.
+
+% (e) Prove that the total width of a valid 12-digit bar code is equal to
+%     95u.
+
+% The 12-digit bar code is composed of:
+%   - 3 Start Bars of u length
+%   - 3 Stop Bars of u length
+%   - 5 Middle Bars of u length
+%   - 12 Digits, each with four bars with total width of 7u
+% Thus, the total length is
+%   3u + 3u + 5u + 12*7u = 95u
+
+
+% (f) Determine the unit width of the bar code 
+
+% Filter out extra lines
+while(length(DD) > 59)
+    % Estimate Basic unit width
+    u = sum(DD)/95;
+    
+    c1 = abs((DD(1)-u)/u);
+    c2 = abs((DD(end)-u)/u);
+    
+    
+    % Delete first and last signals if they are not close to unit length
+    if (c1 > 0.01)
+        DD(1) = [];
+    end
+    if (c2 > 0.01)
+        DD(end) = [];
+    end
+end
+
+% Basic unit width
+u = sum(DD)/95
+
+% (g) Convert the bar widths into unit widths.
+
+% Per Unit Signal
+uu = round(DD/u);
+
+% Plot
+figure(324)
+stem(uu,'k');
+title('10.3.2 Bar Code #1 Normalized Signal')
+ylabel('u(n)')
+xlabel('n');
+
+% (h) Decode the Bar Code
+
+code = decodeUPC(uu)
+
+%% 10.3.2 (j) Process Bar Code #2
+
+
+% Import Image of Bar Code
+imdata = imread('bin/OFFv3.png');
+
+% Extract one line of the Bar Code
+xx = imdata(100,:);
+
+% Define the Filter
+bb = [1 -1];
+
+% Filter signal
+yy = firfilt(bb, xx);
+
+% Plot
+figure(325)
+subplot(2,1,1);
+stem(xx,'k');
+title('10.3.2 Bar Code #2 FIR Filter')
+ylabel('x(n)')
+subplot(2,1,2);
+stem(yy,'k');
+xlabel('n');
+ylabel('y(n)');
+
+% Threshold
+t = 100;
+
+% Sparce Detected signal
+dd = (abs(yy) > t);
+
+% Location signal
+ll = find(dd);
+
+% Plot d(n)
+figure(326);
+stem(ll,'k');
+title('10.3.2 Edge Location Signal')
+ylabel('l(n)');
+xlabel('n');
+
+% Apply a first-difference filter to the location signal
+DD = firfilt(bb, ll);
+
+% Filter out extra lines
+while(length(DD) > 59)
+    % Estimate Basic unit width
+    u = sum(DD)/95;
+    
+    c1 = abs((DD(1)-u)/u);
+    c2 = abs((DD(end)-u)/u);
+    
+    
+    % Delete first and last signals if they are not close to unit length
+    if (c1 > 0.01)
+        DD(1) = [];
+        ll(1) = [];
+    end
+    if (c2 > 0.01)
+        DD(end) = [];
+        ll(end) = [];
+    end
+end
+
+% Basic unit width
+u = sum(DD)/95
+
+% Per Unit Signal
+uu = round(DD/u);
+
+% Plot
+figure(327)
+subplot(2,1,1);
+stem(ll,'k');
+title('10.3.2 Bar Code #2 Filtered Location Signal')
+ylabel('l(n)')
+subplot(2,1,2);
+stem(uu,'k');
+xlabel('n');
+ylabel('u(n)');
+
+% Decode the Bar Code
+
+code = decodeUPC(uu)
+##### SOURCE END #####
+--></body></html>
