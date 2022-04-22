@@ -227,20 +227,20 @@ msgbox(sprintf('FIR Filter coefficients are shown on Matlab code \nlength_FIR = 
 % audible echo.
 %**************************************************************************
 
-% BELOW SECTION HAS BEEN COMMENTED OUT FOR PUBLISHING PURPOSE.
-% % Load file labdat.mat to get speech signal x2
-% load labdat;
-% % Compute the output - FIR Filter (4) - Audio with Echo
-% y1=firfilt(bb2,x2);
-% % Listen to Original Audio
-% waitfor(msgbox("Click 'OK' to listen to Original Speech Audio","3.1.3c)"))
-% sound(x2)
-% pause(4)
-% % Listen to Audio with Echo
-% waitfor(msgbox("Click 'OK' to listen to Speech Audio with Ech..." + ...
-%     "o - created... with FIR Filter (4)","3.1.3c)"))
-% % pause
-% sound(y1)
+
+% Load file labdat.mat to get speech signal x2
+load labdat;
+% Compute the output - FIR Filter (4) - Audio with Echo
+y1=firfilt(bb2,x2);
+% Listen to Original Audio
+waitfor(msgbox("Click 'OK' to listen to Original Speech Audio","3.1.3c)"))
+sound(x2)
+pause(4)
+% Listen to Audio with Echo
+waitfor(msgbox("Click 'OK' to listen to Speech Audio with Ech..." + ...
+    "o - created... with FIR Filter (4)","3.1.3c)"))
+% pause
+sound(y1)
 
 %% 3.2 Cascading Two Systems
 % More complicated systems are often made up from simple building blocks.
@@ -464,7 +464,7 @@ title('Restored Image, M=22')
 subplot(1,3,3)
 imshow(rest_ech90_3,[])
 title('Restored Image,M=33')
-sgtitle("Restored images with different M values(FIR Filter-2)",'FontSize',16);
+sgtitle("Restored images with different M values(FIR Filter-2)")
 
 
 % Analysis of results: 
