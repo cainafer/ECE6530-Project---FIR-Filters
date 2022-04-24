@@ -164,7 +164,7 @@ close all %<--close all figures
 wrst_error=max(error(1:51)) ;
 
 % Message Box with results
-msgbox(sprintf('WRST Error between y[n] & w[n] = %0.5g'...
+msgbox(sprintf('WRST Error between x[n] & y[n] = %0.5g'...
     ,wrst_error),'3.1.2)')
 
 
@@ -338,10 +338,10 @@ title('3.2.1a)Overall Impulse Response, M=22','FontSize',16);
 % system, which includes FIR FILTER-1 AND FIR FILTER-2 in cascade, would
 % have no overall effect on the input. What that mean is that h1[n]*h2[n]
 % needs to be equals to DELTA for that to be true. Theoretically, this can
-% be achieved if the right coefficients in each filter are adequate,
-% however this becomes not so realistic in real world application since
-% there are always unknowns such as electronic noise, temperature drift, or
-% variation between devices.
+% be (closely) achieved if the right coefficients in each filter are
+% adequate, however this becomes not so realistic in real world application
+% since there are always unknowns such as electronic noise, temperature
+% drift, or variation between devices.
 %% 3.2.2 Distorting and Restoring Images
 % If we pick 'q' to be a little less than 1.0, then the first system (FIR
 % FILTER-1) will cause distortion when applied to the rows and columns of
