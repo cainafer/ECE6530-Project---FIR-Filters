@@ -32,13 +32,13 @@ nn=first:last; %<-- use first=1 and last=length(xx)
 % Plots
 figure(1)
 subplot(2,1,1);
-stem(first-1:last-1,xx(nn),'LineWidth',2)
+stem(first-1:last-1,xx(nn),'-k','LineWidth',2)
 xlabel('Time Index (n)','FontSize',16);
 ylabel('Input x[n]','FontSize',16);
 title('3.1a)Deconv Experiment for 1-D Filters','FontSize',16);
 xlim([0 75]);
 subplot(2,1,2);
-stem(first-1:last-1,ww(nn),'filled','LineWidth',2) %--Make black dots
+stem(first-1:last-1,ww(nn),'-k','filled','LineWidth',2) %--Make black dots
 xlabel('Time Index (n)','FontSize',16);
 ylabel('Output w[n]','FontSize',16);
 xlim([0 75]);
@@ -204,7 +204,7 @@ delay=0.2;  %<--s
 
 % Calculations of P and r
 Ts=1/fs;
-P=delay/Ts;
+P=delay/Ts
 r=0.9;
 
 % 3.1.3b)******************************************************************
