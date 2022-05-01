@@ -47,6 +47,7 @@ The output of the first system is the input to the second system, and the overal
 
 ![Cascading System - FIR Filt Equations](https://user-images.githubusercontent.com/100549490/166158797-e2379da8-6a32-4a5d-bd97-0f5c622d13be.png)
 
+![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D)
 
 
 #### FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
