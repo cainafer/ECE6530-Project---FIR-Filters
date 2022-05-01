@@ -24,6 +24,18 @@ This project investigates a few application of FIR filters using MATLAB
 
 ---
 
+## Introduction
+
+FIR filters are frequency-selective filters utilized in a variety of digital signal processing applications in which linear-phase integrity is important.  Because FIR filters are computationally expensive compared to IIR filters, designing efficient filtering algorithms can be critical in applications with limited memory storage or a low tolerance for latency.  However, FIR filters are inherently stable systems and do not induce phase distortion into filtered signals.  Therefore, FIR filters are often used in data, audio, and image processing when data integrity is critical. This project investigates FIR filters commonly used in audio effect manipulation, image restoration, and image edge detection. 
+
+---
+
+## Methods
+
+The following FIR filtering techniques were implemented in this research:
+ 
+
+---
 ## How to Install and Run
 
 ### Minimum System Requirements *
