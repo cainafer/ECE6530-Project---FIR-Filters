@@ -33,7 +33,29 @@ FIR filters are frequency-selective filters utilized in a variety of digital sig
 ## Methods
 
 The following FIR filtering techniques were implemented in this research:
- 
+
+#### Echo: 
+
+A linear-phase shift that generates a signal delay with a relative magnitude to the original signal.  This phenomenon produces echoes and reverberations in audio signals, as well as “ghosts” in images.
+
+#### Cascading Systems: 
+
+The output of the first system is the input to the second system, and the overall output of the cascade system is taken to be the output of the second system. 
+
+█(𝑤[𝑛]=𝑥[𝑛]−𝑞[𝑛−1](𝐹𝐼𝑅 𝐹𝑖𝑙𝑡𝑒𝑟 1) )
+
+█(𝑦[𝑛]=∑2_(𝑙=0)^𝑀▒〖𝑟^𝑙 𝑤[𝑛−𝑙] 〗#(𝐹𝐼𝑅 𝐹𝑖𝑙𝑡𝑒𝑟 2) )
+
+FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
+FIR Filter 2: utilized to (approximately) undo the effect of FIR-Filter 1 . This type of application is called Deconvolution.
+
+#### Deconvolution:
+
+A signal processing technique used to rectify an undesired convolution.  This is useful in image restoration.
+
+#### First-Difference Filter:  𝒚(𝒏)=𝒙(𝒏)−𝒙(𝒏−𝟏) 
+
+A filter designed for detecting significant fluctuations in a signal.  This concept is known as edge detection and can be used in many image processing applications including bar code scanning.
 
 ---
 ## How to Install and Run
