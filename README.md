@@ -16,9 +16,9 @@ This project investigates a few application of FIR filters using MATLAB
 
 ### Application of FIR Filters 
 
-#### 1) Deconvolution Filter - Image Restoration
+#### 1) Echo Filter - Audio Effects
 
-#### 2) Echo Filter - Audio Effects
+#### 2) Deconvolution Filter - Image Restoration
 
 #### 3) Edge Detection - Bar Code Scanner
 
@@ -42,6 +42,9 @@ A linear-phase shift that generates a signal delay with a relative magnitude to 
 
 The output of the first system is the input to the second system, and the overall output of the cascade system is taken to be the output of the second system. 
 
+![Cascading Image](/D - Images/Cascading System Diagram.png)
+
+![FIR Equations](/D - Images/Cascading System - FIR Filt Equations.png)
 
 
 FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
