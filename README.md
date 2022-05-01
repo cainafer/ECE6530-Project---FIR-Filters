@@ -47,7 +47,7 @@ The output of the first system is the input to the second system, and the overal
 
 ### w[n] = x[n] - q[n-1]    (FIR Filter 1)
 
-### y[n] = &‌sum Math.pow(r,l) w[n-l] (FIR Filter 2)
+### y[n] = &sum; Math.pow(r,l) w[n-l] (FIR Filter 2)
 
 ![Cascading System - FIR Filt Equations](https://user-images.githubusercontent.com/100549490/166158797-e2379da8-6a32-4a5d-bd97-0f5c622d13be.png)
 
