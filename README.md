@@ -50,14 +50,17 @@ The output of the first system is the input to the second system, and the overal
 <img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n]&space;=&space;\sum_{l=0}^{M}r^{l}w[n-l](FIR-Filter&space;2)}}&space;" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n] = \sum_{l=0}^{M}r^{l}w[n-l](FIR-Filter 2)}} " />
 
 
-#### FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
-#### FIR Filter 2: utilized to (approximately) undo the effect of FIR-Filter 1 . This type of application is called Deconvolution.
+FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
+### 
+FIR Filter 2: utilized to (approximately) undo the effect of FIR-Filter 1 . This type of application is called Deconvolution.
 
 #### Deconvolution:
 
 A signal processing technique used to rectify an undesired convolution.  This is useful in image restoration.
 
-#### First-Difference Filter:  𝒚(𝒏)=𝒙(𝒏)−𝒙(𝒏−𝟏) 
+#### First-Difference Filter: 
+
+<img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n]=x[n]-x[n-1]&space;}}" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n]=x[n]-x[n-1] }}" />
 
 A filter designed for detecting significant fluctuations in a signal.  This concept is known as edge detection and can be used in many image processing applications including bar code scanning.
 
