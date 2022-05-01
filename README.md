@@ -42,13 +42,13 @@ A linear-phase shift that generates a signal delay with a relative magnitude to 
 
 The output of the first system is the input to the second system, and the overall output of the cascade system is taken to be the output of the second system. 
 
-![Cascading Image](/D - Images/Cascading System Diagram.png)
+![Cascading Image](D - Images/Cascading System Diagram.png)
 
-![FIR Equations](/D - Images/Cascading System - FIR Filt Equations.png)
+![FIR Equations](D - Images/Cascading System - FIR Filt Equations.png)
 
 
-FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
-FIR Filter 2: utilized to (approximately) undo the effect of FIR-Filter 1 . This type of application is called Deconvolution.
+#####FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
+#####FIR Filter 2: utilized to (approximately) undo the effect of FIR-Filter 1 . This type of application is called Deconvolution.
 
 #### Deconvolution:
 
