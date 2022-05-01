@@ -47,7 +47,7 @@ The output of the first system is the input to the second system, and the overal
 
 ![Cascading System - FIR Filt Equations](https://user-images.githubusercontent.com/100549490/166158797-e2379da8-6a32-4a5d-bd97-0f5c622d13be.png)
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\color{white}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
