@@ -49,7 +49,7 @@ The output of the first system is the input to the second system, and the overal
 
 ### y[n] = &sum; Math.pow(r,l) w[n-l] (FIR Filter 2)
 
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+<img src="https://latex.codecogs.com/svg.image?x&plus;3{\color{white}&space;}" title="https://latex.codecogs.com/svg.image?x+3{\color{white} }" />
 
 ![Cascading System - FIR Filt Equations](https://user-images.githubusercontent.com/100549490/166158797-e2379da8-6a32-4a5d-bd97-0f5c622d13be.png)
 
