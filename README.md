@@ -47,7 +47,7 @@ The output of the first system is the input to the second system, and the overal
 
 ![Cascading System - FIR Filt Equations](https://user-images.githubusercontent.com/100549490/166158797-e2379da8-6a32-4a5d-bd97-0f5c622d13be.png)
 
-h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
+https://latex.codecogs.com/svg.image?x=2&plus;3
 
 #### FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
 #### FIR Filter 2: utilized to (approximately) undo the effect of FIR-Filter 1 . This type of application is called Deconvolution.
