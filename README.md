@@ -45,7 +45,7 @@ The output of the first system is the input to the second system, and the overal
 
 ![Cascading System Diagram](https://user-images.githubusercontent.com/100549490/166158792-28f37636-1f4e-4f0e-8f4d-c224d3067694.png)
 
-### <img src="https://latex.codecogs.com/svg.image?{\color{white}w[n]&space;=&space;x[n]&space;-&space;q(n-1)(FIR&space;Filter&space;1)&space;}" title="https://latex.codecogs.com/svg.image?{\color{white}w[n] = x[n] - q(n-1)(FIR-Filter 1)}" /> 
+<img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}w[n]=x[n]-q[n-1](FIR-Filter1)&space;}}" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}w[n]=x[n]-q[n-1](FIR-Filter1) }}" /> 
 
 <img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n]&space;=&space;\sum_{l=0}^{M}r^{l}w[n-l](FIR-Filter&space;2)}}&space;" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n] = \sum_{l=0}^{M}r^{l}w[n-l](FIR-Filter 2)}} " />
 
