@@ -45,11 +45,13 @@ The output of the first system is the input to the second system, and the overal
 
 ![Cascading System Diagram](https://user-images.githubusercontent.com/100549490/166158792-28f37636-1f4e-4f0e-8f4d-c224d3067694.png)
 
+### w[n] = x[n] - q[n-1]    (FIR Filter 1)
+
+### y[n] = &‌sum r^l w[n-l] (FIR Filter 2)
+
 ![Cascading System - FIR Filt Equations](https://user-images.githubusercontent.com/100549490/166158797-e2379da8-6a32-4a5d-bd97-0f5c622d13be.png)
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\color{white}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
 #### FIR Filter 1: utilized to create echoes on signals and data sets (audio, and image data).
 #### FIR Filter 2: utilized to (approximately) undo the effect of FIR-Filter 1 . This type of application is called Deconvolution.
