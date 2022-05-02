@@ -8,6 +8,9 @@ Antonio Santos Aguilera
 Caina Fernandes
 Jason Porter
 
+
+
+
 ---
 
 ## Project Description
@@ -37,13 +40,9 @@ The output of the first system is the input to the second system, and the overal
 
 
 ![FIR Diagram](https://user-images.githubusercontent.com/100549490/166173153-637e9b12-26b2-43a1-802d-3d5b7944050c.svg)
+<img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}w[n]=x[n]-q[n-1](FIR-Filter1)&space;}}" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}w[n]=x[n]-q[n-1](FIR-Filter1) }}" />
 
-$$
-\begin{align}
-	w(n) &= x(n) - q(n-1) \tag{FIR Filter 1}\\
-	y(n) &= \sum_{l=0}^{M}r^lw(n-1) \tag{FIR Filter 2}
-\end{align}
-$$
+<img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n]&space;=&space;\sum_{l=0}^{M}r^{l}w[n-l](FIR-Filter&space;2)}}&space;" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n] = \sum_{l=0}^{M}r^{l}w[n-l](FIR-Filter 2)}} " />
 
 | FILTER       | DESCRIPTION                                                  |
 | ------------ | ------------------------------------------------------------ |
@@ -56,9 +55,7 @@ A signal processing technique used to rectify an undesired convolution.  This i
 
 ### First-Difference Filter: 
 
-$$
-y(n) = x(n) - x(n-1) \tag{First-difference Filter}
-$$
+<img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n]=x[n]-x[n-1]&space;}}" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}y[n]=x[n]-x[n-1] }}" />
 
 A filter designed for detecting significant fluctuations in a signal.  This concept is known as edge detection and can be used in many image processing applications including bar code scanning.
 
