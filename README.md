@@ -88,5 +88,6 @@ A filter designed for detecting significant fluctuations in a signal.  This con
 ## Directory Hierarchy
 
 
+![Directory Hierarquy](https://user-images.githubusercontent.com/100549490/166179732-e161bd92-3cc5-41f7-bd38-b7301c325056.svg)
 
-![Directory Hierarquy](https://user-images.githubusercontent.com/100549490/166179498-30d77bca-01a0-43bc-83e6-59344f3d2c09.svg)
+
