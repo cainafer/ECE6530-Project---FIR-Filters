@@ -43,7 +43,7 @@ A linear-phase shift that generates a signal delay with a relative magnitude to 
 The output of the first system is the input to the second system, and the overall output of the cascade system is taken to be the output of the second system. 
 
 
-![FIR Filter - Restoration Diagram](https://user-images.githubusercontent.com/100549490/166172783-58577af6-f3a6-4815-87af-a33e2ad0f4c0.svg)
+![FIR Filter - Restoration Diagram](https://user-images.githubusercontent.com/100549490/166172956-b24ab71e-5078-4322-b916-8817270647d2.svg)
 
 
 <img src="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}w[n]=x[n]-q[n-1](FIR-Filter1)&space;}}" title="https://latex.codecogs.com/svg.image?\mathbf{{\color{white}w[n]=x[n]-q[n-1](FIR-Filter1) }}" /> 
