@@ -16,9 +16,11 @@ This project investigates a few application of FIR filters using MATLAB. FIR fil
 
 ### Application Topics
 
-1) Echo Filter -- Audio Effects
-2) Deconvolution Filter -- Image Restoration
-3) Edge Detection -- Bar Code Scanner
+| TOPIC                | APPLICATION                                |
+| -------------------- | ------------------------------------------ |
+| Echo Filter          | Audio reverberation                        |
+| Deconvolution Filter | Image restoration                          |
+| Edge Detection       | Image edge detection for bar code scanners |
 
 
 ---
@@ -43,8 +45,9 @@ $$
 \end{align}
 $$
 
-| FIR Filter 1 | Utilized to create echoes on signals and data sets.  This applies to audio and image data. |
+| FILTER       | DESCRIPTION                                                  |
 | ------------ | ------------------------------------------------------------ |
+| FIR Filter 1 | Utilized to create echoes on signals and data sets.  This applies to audio and image data. |
 | FIR Filter 2 | Utilized to undo the effect of Filter 1.  This is known as deconvolution used to restore signals. |
 
 ### Deconvolution:
