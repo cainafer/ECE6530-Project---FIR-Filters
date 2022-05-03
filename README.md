@@ -60,10 +60,11 @@ A signal processing technique used to rectify an undesired convolution.  This i
 A filter designed for detecting significant fluctuations in a signal.  This concept is known as edge detection and can be used in many image processing applications including bar code scanning.
 
 ---
-## References
-[1]J. G. Proakis and D. G. Manolakis, Implementation of Discrete-Time systems, in Digital Signal Processing, Hoboken, NJ: Pearson Education, 2021.
-[2]McClellan, J., Schafer, R. and Yoder, M., n.d. DSP first. 2nd ed., Pearson, 2015.
-[3]S. W. Smith, The scientist and engineer's Guide to Digital Signal Processing. San Diego, CA: California Technical Pub., 1999.
+### References
+
+[1] J. G. Proakis and D. G. Manolakis, Implementation of Discrete-Time systems, in Digital Signal Processing, Hoboken, NJ: Pearson Education, 2021.
+[2] McClellan, J., Schafer, R. and Yoder, M., n.d. DSP first. 2nd ed., Pearson, 2015.
+[3] S. W. Smith, The scientist and engineer's Guide to Digital Signal Processing. San Diego, CA: California Technical Pub., 1999.
 ---
 ## How to Install and Run
 
