@@ -94,6 +94,8 @@ Run program using Editor>Run>Run.
 Open "/B - Programs/Lab 10 - Edge Detection/lab10.m" in MATLAB.  
 Run program using Editor>Run>Run.
 
+Note. To run sections separately, click in the desired section on Editor>Run Section.
+
 #### dconvdemo() GUI
 Locate and unzip "/A - Project Resources/spfirst_v174.zip" to new folder.
 In MATLAB, locate in the unzipped folder "/spfirst/dconvdemo" and type in the console "dconvdemo" to open the dconvdemo GUI. 
